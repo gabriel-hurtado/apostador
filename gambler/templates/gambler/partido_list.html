@@ -1,0 +1,20 @@
+{% extends "gambler/base.html" %}
+
+{% block content %}
+
+<h1>
+    Gambler
+    {% if user %}
+        (<a href="{% url 'gambler:partido_create' %}">add</a>)
+    {% endif %}
+</h1>
+
+<ul>
+    {% for partido in latest_partido_list %}
+        <li><a href="{% url 'gambler:partido_detail' partido.id %}">{{ partido.name }}</a></li>
+    {% empty %}
+        <li>Sorry, no partidos registered yet.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

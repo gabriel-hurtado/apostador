@@ -1,0 +1,34 @@
+{% extends "gambler/base.html" %}
+
+{% block title %}Gambler - {{ partido.name }}{% endblock %}
+
+{% block content %}
+
+<span vocab="http://schema.org/" typeof="Partido">
+<h1>
+    <span property="name">{{ partido.name }}</span>
+    {% if user == partido.user %}
+        (<a href="{% url 'gambler:partido_edit' partido.id %}">edit</a>)
+    {% endif %}
+</h1>
+
+
+<h2>
+    Apuestaes
+    {% if user %}
+        (<a href="{% url 'gambler:apuesta_create' partido.id %}">add</a>)
+    {% endif %}
+</h2>
+<ul>
+    {% for apuesta in partido.apuestaes.all %}
+        <li><a href="{% url 'gambler:apuesta_detail' partido.id apuesta.id %}">{{ apuesta.name }}</a></li>
+    {% empty %}
+        <li>Sorry, no apuestaes for this partido yet.</li>
+    {% endfor %}
+</ul></span>
+
+{% endblock %}
+
+{% block footer %}
+    Created by {{ partido.user }}
+{% endblock %}

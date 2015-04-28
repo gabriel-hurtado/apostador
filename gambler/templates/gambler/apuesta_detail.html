@@ -1,0 +1,21 @@
+{% extends "gambler/base.html" %}
+
+{% block content %}
+
+<h1>
+    {{ apuesta.name }}
+    {% if user == apuesta.user %}
+        (<a href="{% url 'gambler:apuesta_edit' apuesta.partido.id apuesta.id %}">edit</a>)
+    {% endif %}
+</h1>
+<p>{{ apuesta.description }}</p>
+{% if apuesta.image %}
+    <p><img src="{{ apuesta.image.url }}"/></p>
+{% endif %}
+<p>Served by <a href="{% url 'gambler:partido_detail' apuesta.partido.id %}">{{ apuesta.partido.name }}</a></p>
+
+{% endblock %}
+
+{% block footer %}
+    Created by {{ apuesta.user }}
+{% endblock %}
