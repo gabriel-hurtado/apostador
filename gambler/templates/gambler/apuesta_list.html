@@ -1,0 +1,19 @@
+{% extends "gambler/show_lists.html" %}
+
+
+{% block list3 %}
+
+
+<h2>
+    Apuestas
+</h2>
+
+<ul>
+    {% for apuesta in latest_apuesta_list %}
+        <li>{{ apuesta.partido.equipoVisitante.nombreEquipo }} - {{ apuesta.partido.equipoLocal.nombreEquipo }} Apuesta :  {{ apuesta.apuesta }} € Cuota : {{ apuesta.cuota }}</li>
+    {% empty %}
+        <li>Sorry, no apuestas registered yet.</li>
+    {% endfor %}
+</ul>
+
+{% endblock list3 %}

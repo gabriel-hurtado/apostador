@@ -43,6 +43,11 @@ class EquipoList(ListView, ConnegResponseMixin):
     context_object_name = 'latest_equipo_list'
     template_name = 'gambler/equipo_list.html'
 
+class ApuestaList(ListView, ConnegResponseMixin):
+    model = Apuesta
+    context_object_name = 'latest_apuesta_list'
+    template_name = 'gambler/apuesta_list.html'
+
 
 class PartidoDetail(DetailView, ConnegResponseMixin):
     model = Partido
@@ -58,6 +63,14 @@ class EquipoDetail(DetailView, ConnegResponseMixin):
 
     def get_context_data(self, **kwargs):
         context = super(EquipoDetail, self).get_context_data(**kwargs)
+        return context
+
+class ApuestaDetail(DetailView, ConnegResponseMixin):
+    model = Apuesta
+    template_name = 'gambler/apuesta_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ApuestaDetail, self).get_context_data(**kwargs)
         return context
 
 class ApuestaCreate(CreateView):

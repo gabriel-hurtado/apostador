@@ -3,34 +3,37 @@ from django.views.generic import DetailView, ListView, UpdateView
 
 from gambler.models import Apuesta
 from gambler.forms import ApuestaForm
-from gambler.views import ApuestaCreate, PartidoDetail, PartidoList, EquipoList, EquipoDetail
+from gambler.views import ApuestaCreate, PartidoDetail, PartidoList, EquipoList, EquipoDetail, ApuestaList
 
 urlpatterns = patterns('',
     # List latest 5 partido: /gambler/
     url(r'^$', PartidoList.as_view(), name='partido_list'),
 
      # List latest 5 equipo: /gambler/partidos
-    url(r'^partidos$', EquipoList.as_view(), name='equipo_list'),
+    url(r'^equipo$', EquipoList.as_view(), name='equipo_list'),
+
+    # List latest 5 apuesta: /gambler/apuestas
+    url(r'^apuesta$', ApuestaList.as_view(), name='apuesta_list'),
 
     # List gambler: /gambler/gambler.json
-    #url(r'^gambler\.(?P<extension>(json|xml))$',
-        #PartidoList.as_view(),
-        #name='partido_list_conneg'),
-
-    # List equipos: /gambler/gambler.json
     url(r'^gambler\.(?P<extension>(json|xml))$',
+        PartidoList.as_view(),
+        name='partido_list_conneg'),
+
+    # List equipos: /gambler/equipos/gambler.json
+    url(r'^equipo\.(?P<extension>(json|xml))$',
         EquipoList.as_view(),
         name='equipo_list_conneg'),
+
+    # List apuestas: /gambler/apuestas/gambler.json
+    url(r'^apuesta\.(?P<extension>(json|xml))$',
+        ApuestaList.as_view(),
+        name='apuesta_list_conneg'),
 
     # Partido details, ex.: /gambler/gambler/1/
     url(r'^gambler/(?P<pk>\d+)/$',
         PartidoDetail.as_view(),
         name='partido_detail'),
-
-    # Equipo details, ex.: /gambler/gambler/1/
-    url(r'^gambler/(?P<pk>\d+)/$',
-        EquipoDetail.as_view(),
-        name='equipo_detail'),
 
     # Partido details, ex.: /gambler/gambler/1.json
     url(r'^gambler/(?P<pk>\d+)\.(?P<extension>(json|xml))$',
