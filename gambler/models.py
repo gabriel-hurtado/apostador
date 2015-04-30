@@ -1,25 +1,15 @@
 # Create your models here.
 from django.db import models
 from django.contrib.auth.models import User
-#from django.contrib.auth.models import AbstractUser
 from django.core.urlresolvers import reverse
 from datetime import date
-
-class Usuario(models.Model):
-    nombre = models.TextField()
-    contrasena = models.TextField()
-    cuenta = models.DecimalField(max_digits=11, decimal_places=2)
-    def __unicode__(self):
-        return u"%s" % self.name
-    def get_absolute_url(self):
-        return reverse('beds:apuesta_detail', kwargs={'pk': self.pk})
 
 class Equipo(models.Model):
     nombreEquipo = models.TextField()
     def __unicode__(self):
         return u"%s" % self.name
     def get_absolute_url(self):
-        return reverse('beds:apuesta_detail', kwargs={'pk': self.pk})
+        return reverse('gambler:equipo_detail', kwargs={'pk': self.pk})
 
 class Resultado(models.Model):
     golLocal = models.IntegerField(default=-1)
@@ -27,7 +17,7 @@ class Resultado(models.Model):
     def __unicode__(self):
         return u"%s" % self.name
     def get_absolute_url(self):
-        return reverse('beds:apuesta_detail', kwargs={'pk': self.pk})
+        return reverse('gambler:resultado_detail', kwargs={'pk': self.pk})
 
 class Partido(models.Model):
     jornada = models.IntegerField()
@@ -38,15 +28,15 @@ class Partido(models.Model):
     def __unicode__(self):
         return u"%s" % self.name
     def get_absolute_url(self):
-        return reverse('beds:apuesta_detail', kwargs={'pk': self.pk})
+        return reverse('gambler:partido_detail', kwargs={'pk': self.pk})
 
 class Apuesta(models.Model):
-    user = models.ForeignKey(Usuario)
+    user = models.ForeignKey(User)
     partido = models.ForeignKey(Partido)
-    apuesta = models.DecimalField(max_digits=11, decimal_places=2)
     cuota = models.DecimalField(max_digits=3, decimal_places=2)
+    apuesta = models.DecimalField(max_digits=11, decimal_places=2)
     resultado = models.ForeignKey(Resultado)
     def __unicode__(self):
         return u"%s" % self.name
     def get_absolute_url(self):
-        return reverse('beds:apuesta_detail', kwargs={'pkr': self.apuesta.pk, 'pk': self.pk})
+        return reverse('gambler:apuesta_detail', kwargs={'pkr': self.apuesta.pk, 'pk': self.pk})

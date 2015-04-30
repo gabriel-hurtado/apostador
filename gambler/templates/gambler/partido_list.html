@@ -6,11 +6,27 @@
     Gambler
 </h1>
 
+<h2>
+    Partidos
+</h2>
+
 <ul>
     {% for partido in latest_partido_list %}
-        <li><a href="{% url 'gambler:partido_detail' partido.id %}">{{ partido.fecha }}-{{ partido.equipoLocal.nombreEquipo }} - {{partido.equipoVisitante.nombreEquipo  }}</a></li>
+        <li><a href="{% url 'gambler:partido_detail' partido.id %}">{{ partido.fecha }}-{{ partido.equipoLocal.nombreEquipo }} - {{partido.equipoVisitante.nombreEquipo }}</a></li>
     {% empty %}
         <li>Sorry, no partidos registered yet.</li>
+    {% endfor %}
+</ul>
+
+<h2>
+    Equipos
+</h2>
+
+<ul>
+    {% for equipo in equipo.all %}
+        <li>{{ equipo.nombreEquipo }}</li>
+    {% empty %}
+        <li>Sorry, no equipos registered yet.</li>
     {% endfor %}
 </ul>
 

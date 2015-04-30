@@ -14,16 +14,16 @@
 
 
 <h2>
-    Apuestaes
+    Apuestas
     {% if user %}
         (<a href="{% url 'gambler:apuesta_create' partido.id %}">add</a>)
     {% endif %}
 </h2>
 <ul>
-    {% for apuesta in partido.apuestaes.all %}
+    {% for apuesta in partido.apuestas.all %}
         <li><a href="{% url 'gambler:apuesta_detail' partido.id apuesta.id %}">{{ apuesta.name }}</a></li>
     {% empty %}
-        <li>Sorry, no apuestaes for this partido yet.</li>
+        <li>Sorry, no apuestas for this partido yet.</li>
     {% endfor %}
 </ul></span>
 

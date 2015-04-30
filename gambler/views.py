@@ -10,8 +10,8 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.base import TemplateResponseMixin
 from django.views.generic.edit import CreateView
 
-from gambler.models import Partido, Apuesta
-from gambler.forms import PartidoForm, ApuestaForm
+from gambler.models import Partido, Apuesta, Equipo
+from gambler.forms import ApuestaForm
 
 class ConnegResponseMixin(TemplateResponseMixin):
 
@@ -41,6 +41,11 @@ class PartidoList(ListView, ConnegResponseMixin):
     context_object_name = 'latest_partido_list'
     template_name = 'gambler/partido_list.html'
 
+class EquipoList(ListView, ConnegResponseMixin):
+    model = Equipo
+    context_object_name = 'equipo_list'
+    template_name = 'gambler/partido_list.html'
+
 class PartidoDetail(DetailView, ConnegResponseMixin):
     model = Partido
     template_name = 'gambler/partido_detail.html'
@@ -49,14 +54,13 @@ class PartidoDetail(DetailView, ConnegResponseMixin):
         context = super(PartidoDetail, self).get_context_data(**kwargs)
         return context
 
-class PartidoCreate(CreateView):
-    model = Partido
-    template_name = 'gambler/form.html'
-    form_class = PartidoForm
+class EquipoDetail(DetailView, ConnegResponseMixin):
+    model = Equipo
+    template_name = 'gambler/partido_detail.html'
 
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super(PartidoCreate, self).form_valid(form)
+    def get_context_data(self, **kwargs):
+        context = super(EquipoDetail, self).get_context_data(**kwargs)
+        return context
 
 class ApuestaCreate(CreateView):
     model = Apuesta
