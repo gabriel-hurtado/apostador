@@ -1,0 +1,18 @@
+{% extends "gambler/show_lists.html" %}
+
+{% block list4 %}
+
+
+<h2>
+    Resultados
+</h2>
+
+<ul>
+    {% for resultado in latest_resultado_list %}
+        <li>{{ resultado.golVisitante }} - {{resultado.golLocal }}</li>
+    {% empty %}
+        <li>Sorry, no resultados registered yet.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
