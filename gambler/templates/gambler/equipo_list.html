@@ -1,10 +1,8 @@
-{% extends "gambler/base.html" %}
+{% extends "gambler/show_lists.html" %}
 
-{% block content %}
+{% block list2 %}
 
-<h1>
-    Gambler
-</h1>
+
 
 <h2>
     Equipos
@@ -12,9 +10,10 @@
 
 <ul>
     {% for equipo in latest_equipo_list %}
-        <li><a href="{% url 'gambler:equipo_detail' equipo.id %}">{{ equipo.nombreEquipo }}</a></li>
+        <li>{{ equipo.nombreEquipo }}</li>
     {% empty %}
         <li>Sorry, no equipos registered yet.</li>
-    {% endfor %}
+    {% endfor %}</ul>
 
-{% endblock %}
+
+{% endblock list2 %}

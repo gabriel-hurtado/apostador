@@ -7,17 +7,17 @@ from gambler.views import ApuestaCreate, PartidoDetail, PartidoList, EquipoList,
 
 urlpatterns = patterns('',
     # List latest 5 partido: /gambler/
-    #url(r'^$', PartidoList.as_view(), name='partido_list'),
+    url(r'^$', PartidoList.as_view(), name='partido_list'),
 
-     # List latest 5 equipo: /gambler/
-    url(r'^$', EquipoList.as_view(), name='equipo_list'),
+     # List latest 5 equipo: /gambler/partidos
+    url(r'^partidos$', EquipoList.as_view(), name='equipo_list'),
 
     # List gambler: /gambler/gambler.json
     #url(r'^gambler\.(?P<extension>(json|xml))$',
         #PartidoList.as_view(),
         #name='partido_list_conneg'),
 
-    # List gambler: /gambler/gambler.json
+    # List equipos: /gambler/gambler.json
     url(r'^gambler\.(?P<extension>(json|xml))$',
         EquipoList.as_view(),
         name='equipo_list_conneg'),
