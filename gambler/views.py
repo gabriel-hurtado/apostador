@@ -47,7 +47,7 @@ class EquipoList(ListView, ConnegResponseMixin):
 class ApuestaList(ListView, ConnegResponseMixin):
     model = Apuesta
     context_object_name = 'latest_apuesta_list'
-    template_name = 'gambler/apuesta_list.html'
+    template_name = 'gambler/apuestas_list.html'
 
 
 class PartidoDetail(DetailView, ConnegResponseMixin):
@@ -68,7 +68,7 @@ class EquipoDetail(DetailView, ConnegResponseMixin):
 
 class ApuestaDetail(DetailView, ConnegResponseMixin):
     model = Apuesta
-    template_name = 'gambler/apuesta_detail.html'
+    template_name = 'gambler/apuestas_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super(ApuestaDetail, self).get_context_data(**kwargs)

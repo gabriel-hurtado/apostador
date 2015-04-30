@@ -12,7 +12,7 @@ urlpatterns = patterns('',
 
 
     # List latest 5 apuesta: /gambler/apuestas
-    url(r'^apuesta$', ApuestaList.as_view(), name='apuesta_list'),
+    url(r'^apuestas$', ApuestaList.as_view(), name='apuestas_list'),
 
     # List latest 5 partido: /gambler/partidos
     url(r'^partidos$', PartidoList.as_view(), name='partidos_list'),
@@ -31,7 +31,7 @@ urlpatterns = patterns('',
         name='equipo_list_conneg'),
 
     # List apuestas: /gambler/apuestas/gambler.json
-    url(r'^apuesta\.(?P<extension>(json|xml))$',
+    url(r'^apuestas\.(?P<extension>(json|xml))$',
         ApuestaList.as_view(),
         name='apuesta_list_conneg'),
 
@@ -54,7 +54,7 @@ urlpatterns = patterns('',
     url(r'^gambler/(?P<pkr>\d+)/apuestaes/(?P<pk>\d+)/$',
         DetailView.as_view(
             model=Apuesta,
-            template_name='gambler/apuesta_detail.html'),
+            template_name='gambler/apuestas_detail.html'),
         name='apuesta_detail'),
 
     # Create a partido apuesta, ex: /gambler/gambler/1/apuestaes/create/
