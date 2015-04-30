@@ -10,6 +10,7 @@ from django.views.generic.edit import CreateView
 from gambler.models import Partido, Apuesta, Equipo
 from gambler.forms import ApuestaForm
 
+
 class ConnegResponseMixin(TemplateResponseMixin):
 
     def render_json_object_response(self, objects, **kwargs):

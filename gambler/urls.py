@@ -1,15 +1,20 @@
 from django.conf.urls import patterns, url
-from django.views.generic import DetailView, ListView, UpdateView
+from django.views.generic import DetailView, ListView, UpdateView, TemplateView
 
 from gambler.models import Apuesta
 from gambler.forms import ApuestaForm
-from gambler.views import ApuestaCreate, PartidoDetail, PartidoList, EquipoList, EquipoDetail
+from django.conf.urls import patterns, url
+from gambler.views import *
 
 urlpatterns = patterns('',
-    # List latest 5 partido: /gambler/
-    url(r'^$', PartidoList.as_view(), name='partidos_list'),
+    url(r'^$', TemplateView.as_view(template_name='base.html'), name='base'),
 
-     # List latest 5 equipo: /gambler/partidos
+
+
+    # List latest 5 partido: /gambler/partidos
+    url(r'^partidos$', PartidoList.as_view(), name='partidos_list'),
+
+     # List latest 5 equipo: /gambler/equipos
     url(r'^equipos$', EquipoList.as_view(), name='equipos_list'),
 
     # List gambler: /gambler/partidos.json
