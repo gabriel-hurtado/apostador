@@ -35,39 +35,32 @@ urlpatterns = patterns('',
         ApuestaList.as_view(),
         name='apuesta_list_conneg'),
 
-    # Partido details, ex.: /gambler/gambler/1/
-    url(r'^gambler/(?P<pk>\d+)/$',
+    # Partido details, ex.: /gambler/partido/1/
+    url(r'^partido/(?P<pk>\d+)/$',
         PartidoDetail.as_view(),
         name='partido_detail'),
 
-    # Partido details, ex.: /gambler/gambler/1.json
-    url(r'^gambler/(?P<pk>\d+)\.(?P<extension>(json|xml))$',
+    # Partido details, ex.: /gambler/partido/1.json
+    url(r'^partido/(?P<pk>\d+)\.(?P<extension>(json|xml))$',
         PartidoDetail.as_view(),
         name='partido_detail_conneg'),
 
-    # Equipo details, ex.: /gambler/gambler/1.json
+    # Equipo details, ex.: /gambler/equipo/1.json
     url(r'^gambler/(?P<pk>\d+)\.(?P<extension>(json|xml))$',
         EquipoDetail.as_view(),
         name='equipo_detail_conneg'),
 
-    # Partido apuesta details, ex: /gambler/gambler/1/apuestaes/1/
-    url(r'^gambler/(?P<pkr>\d+)/apuestaes/(?P<pk>\d+)/$',
+    # Partido apuesta details, ex: /gambler/partido/1/apuesta/1/
+    url(r'^partido/(?P<pkr>\d+)/apuesta/(?P<pk>\d+)/$',
         DetailView.as_view(
             model=Apuesta,
             template_name='gambler/apuestas_detail.html'),
         name='apuesta_detail'),
 
-    # Create a partido apuesta, ex: /gambler/gambler/1/apuestaes/create/
-    url(r'^gambler/(?P<pk>\d+)/apuestaes/create/$',
+    # Create a partido apuesta, ex: /gambler/partido/1/apuesta/create/
+    url(r'^partido/(?P<pk>\d+)/apuesta/create/$',
         ApuestaCreate.as_view(),
         name='apuesta_create'),
 
-    # Edit partido apuesta details, ex: /gambler/gambler/1/apuestaes/1/edit/
-    url(r'^gambler/(?P<pkr>\d+)/apuestaes/(?P<pk>\d+)/edit/$',
-        UpdateView.as_view(
-            model=Apuesta,
-            form_class=ApuestaForm,
-            template_name='gambler/form.html'),
-        name='apuesta_edit'),
 
 )
