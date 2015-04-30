@@ -39,4 +39,4 @@ class Apuesta(models.Model):
     def __unicode__(self):
         return u"%s" % self.name
     def get_absolute_url(self):
-        return reverse('gambler:apuesta_detail', kwargs={'pkr': self.apuesta.pk, 'pk': self.pk})
+        return reverse('gambler:apuesta_detail', kwargs={ 'pk': self.pk})

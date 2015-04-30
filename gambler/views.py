@@ -7,7 +7,7 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.base import TemplateResponseMixin
 from django.views.generic.edit import CreateView
 
-from gambler.models import Partido, Apuesta, Equipo
+from gambler.models import Partido, Apuesta, Equipo, Resultado
 from gambler.forms import ApuestaForm
 
 
@@ -37,33 +37,29 @@ class ConnegResponseMixin(TemplateResponseMixin):
 class PartidoList(ListView, ConnegResponseMixin):
     model = Partido
     context_object_name = 'latest_partido_list'
-    template_name = 'gambler/partido_list.html'
+    template_name = 'gambler/partidos_list.html'
 
 class EquipoList(ListView, ConnegResponseMixin):
     model = Equipo
     context_object_name = 'latest_equipo_list'
-    template_name = 'gambler/equipo_list.html'
+    template_name = 'gambler/equipos_list.html'
 
 class ApuestaList(ListView, ConnegResponseMixin):
     model = Apuesta
     context_object_name = 'latest_apuesta_list'
     template_name = 'gambler/apuestas_list.html'
 
+class ResultadoList(ListView, ConnegResponseMixin):
+    model = Resultado
+    context_object_name = 'latest_resultado_list'
+    template_name = 'gambler/resultados_list.html'
 
 class PartidoDetail(DetailView, ConnegResponseMixin):
     model = Partido
-    template_name = 'gambler/partido_detail.html'
+    template_name = 'gambler/partidos_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super(PartidoDetail, self).get_context_data(**kwargs)
-        return context
-
-class EquipoDetail(DetailView, ConnegResponseMixin):
-    model = Equipo
-    template_name = 'gambler/partido_detail.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(EquipoDetail, self).get_context_data(**kwargs)
         return context
 
 class ApuestaDetail(DetailView, ConnegResponseMixin):
