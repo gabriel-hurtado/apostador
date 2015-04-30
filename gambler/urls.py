@@ -5,7 +5,7 @@ from gambler.models import Apuesta
 from gambler.forms import ApuestaForm
 from django.conf.urls import patterns, url
 from gambler.views import *
-from gambler.views import ApuestaCreate, PartidoDetail, PartidoList, EquipoList, EquipoDetail, ApuestaList
+from gambler.views import ApuestaCreate, PartidoDetail, PartidoList, EquipoList, ApuestaList, ResultadoList
 
 urlpatterns = patterns('',
     url(r'^$', TemplateView.as_view(template_name='base.html'), name='base'),
@@ -20,7 +20,10 @@ urlpatterns = patterns('',
      # List latest 5 equipo: /gambler/equipos
     url(r'^equipos$', EquipoList.as_view(), name='equipos_list'),
 
-    # List gambler: /gambler/partidos.json
+     # List latest 5 equipo: /gambler/equipos
+    url(r'^resultados$', ResultadoList.as_view(), name='resultados_list'),
+
+    # List partidos: /gambler/partidos.json
         url(r'^partidos\.(?P<extension>(json|xml))$',
         PartidoList.as_view(),
         name='partido_list_conneg'),
@@ -30,10 +33,15 @@ urlpatterns = patterns('',
         EquipoList.as_view(),
         name='equipo_list_conneg'),
 
-    # List apuestas: /gambler/apuestas/gambler.json
+    # List apuestas: /gambler/apuestas.json
     url(r'^apuestas\.(?P<extension>(json|xml))$',
         ApuestaList.as_view(),
         name='apuesta_list_conneg'),
+
+    # List resultados: /gambler/resultados.json
+    url(r'^resultados\.(?P<extension>(json|xml))$',
+        ResultadoList.as_view(),
+        name='resultado_list_conneg'),
 
     # Partido details, ex.: /gambler/partido/1/
     url(r'^partido/(?P<pk>\d+)/$',
@@ -45,12 +53,7 @@ urlpatterns = patterns('',
         PartidoDetail.as_view(),
         name='partido_detail_conneg'),
 
-    # Equipo details, ex.: /gambler/equipo/1.json
-    url(r'^gambler/(?P<pk>\d+)\.(?P<extension>(json|xml))$',
-        EquipoDetail.as_view(),
-        name='equipo_detail_conneg'),
-
-    # Partido apuesta details, ex: /gambler/partido/1/apuesta/1/
+    # Partido apuesta details, ex: /gambler/gambler/1/apuestaes/1/
     url(r'^partido/(?P<pkr>\d+)/apuesta/(?P<pk>\d+)/$',
         DetailView.as_view(
             model=Apuesta,
@@ -62,5 +65,12 @@ urlpatterns = patterns('',
         ApuestaCreate.as_view(),
         name='apuesta_create'),
 
+    # Edit partido apuesta details, ex: /gambler/partido/1/apuesta/1/edit/
+    url(r'^partido/(?P<pkr>\d+)/apuesta/(?P<pk>\d+)/edit/$',
+        UpdateView.as_view(
+            model=Apuesta,
+            form_class=ApuestaForm,
+            template_name='gambler/form.html'),
+        name='apuesta_edit'),
 
 )
