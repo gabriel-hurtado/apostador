@@ -1,8 +1,5 @@
 # Create your views here.
 from django.core import serializers
-
-from django.utils import timezone
-
 from django.core import urlresolvers
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404
@@ -43,8 +40,9 @@ class PartidoList(ListView, ConnegResponseMixin):
 
 class EquipoList(ListView, ConnegResponseMixin):
     model = Equipo
-    context_object_name = 'equipo_list'
-    template_name = 'gambler/partido_list.html'
+    context_object_name = 'latest_equipo_list'
+    template_name = 'gambler/equipo_list.html'
+
 
 class PartidoDetail(DetailView, ConnegResponseMixin):
     model = Partido

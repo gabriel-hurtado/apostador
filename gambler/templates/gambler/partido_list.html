@@ -18,16 +18,4 @@
     {% endfor %}
 </ul>
 
-<h2>
-    Equipos
-</h2>
-
-<ul>
-    {% for equipo in equipo.all %}
-        <li>{{ equipo.nombreEquipo }}</li>
-    {% empty %}
-        <li>Sorry, no equipos registered yet.</li>
-    {% endfor %}
-</ul>
-
 {% endblock %}
