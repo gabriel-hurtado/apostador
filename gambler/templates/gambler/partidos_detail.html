@@ -4,9 +4,7 @@
 
 {% block content %}
 
-<span vocab="http://schema.org/" typeof="Partido">
 <h1>
-    <span property="name">{{ partido.name }}</span>
     {% if user == partido.user %}
         (<a href="{% url 'gambler:partido_edit' partido.id %}">edit</a>)
     {% endif %}
@@ -16,18 +14,16 @@
 <h2>
     Apuestas
     {% if user.is_authenticated %}
-        (<a href="{% url 'gambler:apuesta_create' partido.id %}">add</a>)
+        (<a href="{% url 'gambler:apuesta_create' partido.id %}">anadir</a>)
     {% endif %}
 </h2>
 <ul>
-    {% for apuesta in latest_apuesta_list %}
-        {% if partido == apuesta.partido %}
-        <li><a href="{% url 'gambler:apuesta_detail' partido.id apuesta.id %}">{{ apuesta.name }}</a></li>
-        {% endif %}
+    {% for apuesta in partido.apuestas.all %}
+        <li>{{ apuesta.partido.equipoLocal.nombreEquipo }} {{ apuesta.resultado.golLocal }} - {{ apuesta.partido.equipoVisitante.nombreEquipo }} {{ apuesta.resultado.golVisitante }} Apuesta :  {{ apuesta.apuesta }} € </li>
     {% empty %}
         <li>Sorry, no apuestas for this partido yet.</li>
     {% endfor %}
-</ul></span>
+</ul>
 
 {% endblock %}
 

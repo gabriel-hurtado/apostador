@@ -4,4 +4,4 @@ from gambler.models import Apuesta
 class ApuestaForm(ModelForm):
     class Meta:
         model = Apuesta
-        exclude = ('partido', 'user', 'date', 'cuota',)
+        exclude = ('partido', 'user', 'date',)

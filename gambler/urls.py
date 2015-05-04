@@ -53,24 +53,8 @@ urlpatterns = patterns('',
         PartidoDetail.as_view(),
         name='partido_detail_conneg'),
 
-    # Partido apuesta details, ex: /gambler/gambler/1/apuestaes/1/
-    url(r'^partido/(?P<pkr>\d+)/apuesta/(?P<pk>\d+)/$',
-        DetailView.as_view(
-            model=Apuesta,
-            template_name='gambler/apuestas_detail.html'),
-        name='apuesta_detail'),
-
     # Create a partido apuesta, ex: /gambler/partido/1/apuesta/create/
     url(r'^partido/(?P<pk>\d+)/apuesta/create/$',
         ApuestaCreate.as_view(),
         name='apuesta_create'),
-
-    # Edit partido apuesta details, ex: /gambler/partido/1/apuesta/1/edit/
-    url(r'^partido/(?P<pkr>\d+)/apuesta/(?P<pk>\d+)/edit/$',
-        UpdateView.as_view(
-            model=Apuesta,
-            form_class=ApuestaForm,
-            template_name='gambler/form.html'),
-        name='apuesta_edit'),
-
 )

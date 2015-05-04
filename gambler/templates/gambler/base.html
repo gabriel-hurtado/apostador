@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="{% static "style/base.css" %}" />
-    <title>{% block title %}Gambler by MyRecommentdations.org{% endblock %}</title>
+    <title>{% block title %}Gambler by Apostador.org{% endblock %}</title>
 </head>
 
 <body>
@@ -13,7 +13,7 @@
         {% if user.username %}
             <p>User {{ user.username }} (<a href="/accounts/logout/?next=/gambler/">logout</a>)</p>
         {% else %}
-            <p><a href="/accounts/login/?next=/gambler/">Sign in</a></p>
+            <p><a href="/accounts/login/?next=/gambler/">Registrame</a></p>
         {% endif %}
     {% endblock %}
 </div>
@@ -42,7 +42,9 @@
 </div>
 
 <div id="footer">
-    {% block footer %}{% endblock %}
+    {% block footer %}
+
+    {% endblock %}
 </div>
 
 </body>
