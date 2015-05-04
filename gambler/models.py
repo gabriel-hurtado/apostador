@@ -23,6 +23,7 @@ class Partido(models.Model):
     jornada = models.IntegerField()
     equipoLocal = models.ForeignKey(Equipo, related_name='equipo_local')
     equipoVisitante = models.ForeignKey(Equipo, related_name='equipo_visitante')
+    cuota = models.DecimalField(max_digits=3, decimal_places=2, default=1)
     fecha = models.DateField(default=date.today)
     resultado = models.ForeignKey(Resultado)
     def __unicode__(self):
@@ -33,7 +34,6 @@ class Partido(models.Model):
 class Apuesta(models.Model):
     user = models.ForeignKey(User)
     partido = models.ForeignKey(Partido)
-    cuota = models.DecimalField(max_digits=3, decimal_places=2, default=1)
     apuesta = models.DecimalField(max_digits=11, decimal_places=2)
     resultado = models.ForeignKey(Resultado)
     def __unicode__(self):
