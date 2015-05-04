@@ -8,11 +8,11 @@
 </h2>
 
 <ul>
-    {% for apuesta in latest_apuesta_list %}
-        <li>{{ apuesta.user}} / {{ apuesta.partido.equipoVisitante.nombreEquipo }} - {{ apuesta.partido.equipoLocal.nombreEquipo }} Apuesta :  {{ apuesta.apuesta }} € </li>
-    {% empty %}
-        <li>Sorry, no apuestas registered yet.</li>
-    {% endfor %}
+        {% for apuesta in latest_apuesta_list %}
+            <li>{{ apuesta.user}} / {{ apuesta.partido.equipoVisitante.nombreEquipo }} - {{ apuesta.partido.equipoLocal.nombreEquipo }} Apuesta :  {{ apuesta.apuesta }} € </li>
+        {% empty %}
+            <li>Sorry, no apuestas registered yet.</li>
+        {% endfor %}
 </ul>
 
 {% endblock list3 %}

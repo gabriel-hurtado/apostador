@@ -24,26 +24,33 @@
         <ul>
             <li><a href="/gambler/">Home</a></li>
         </ul>
+
+
+        <h3>Navigate : </h3>
+            <ul>
+            <li><a href="/gambler/partidos">Partidos</a></li>
+            <li><a href="/gambler/equipos">Equipos</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="/gambler/apuestas">Apuestas</a></li>
+            {% endif %}
+            <li><a href="/gambler/resultados">Resultados</a></li>
+        </ul>
     {% endblock %}
 </div>
 
 <div id="content">
+    <h1>
+        Gambler
+    </h1>
+
     {% block content %}
         {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
     {% endblock %}
 
-    <h3>Navigate</h3>
-    <ul>
-        <li><a href="/gambler/partidos">Partidos</a></li>
-        <li><a href="/gambler/equipos">Equipos</a></li>
-        <li><a href="/gambler/apuestas">Apuestas</a></li>
-        <li><a href="/gambler/resultados">Resultados</a></li>
-    </ul>
 </div>
 
 <div id="footer">
     {% block footer %}
-
     {% endblock %}
 </div>
 

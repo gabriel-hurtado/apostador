@@ -9,7 +9,7 @@
 
 <ul>
     {% for resultado in latest_resultado_list %}
-        <li>{{ resultado.golVisitante }} - {{resultado.golLocal }}</li>
+        <li> Goal Visitante : {{ resultado.golVisitante }} - Goal Locales : {{resultado.golLocal }}</li>
     {% empty %}
         <li>Sorry, no resultados registered yet.</li>
     {% endfor %}
