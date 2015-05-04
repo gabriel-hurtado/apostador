@@ -9,7 +9,7 @@
 
 <ul>
         {% for apuesta in latest_apuesta_list %}
-            <li>{{ apuesta.user}} / {{ apuesta.partido.equipoVisitante.nombreEquipo }} - {{ apuesta.partido.equipoLocal.nombreEquipo }} Apuesta :  {{ apuesta.apuesta }} € </li>
+            <li><a href="{% url 'gambler:apuesta_detail' apuesta.id %}">{{ apuesta.user}} / {{ apuesta.partido.equipoVisitante.nombreEquipo }} - {{ apuesta.partido.equipoLocal.nombreEquipo }}</a></li>
         {% empty %}
             <li>Sorry, no apuestas registered yet.</li>
         {% endfor %}

@@ -62,6 +62,14 @@ class PartidoDetail(DetailView, ConnegResponseMixin):
         context = super(PartidoDetail, self).get_context_data(**kwargs)
         return context
 
+class ApuestaDetail(DetailView, ConnegResponseMixin):
+    model = Apuesta
+    template_name = 'gambler/apuestas_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ApuestaDetail, self).get_context_data(**kwargs)
+        return context
+
 class ApuestaCreate(CreateView):
     model = Apuesta
     template_name = 'gambler/form.html'

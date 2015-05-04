@@ -5,7 +5,7 @@ from gambler.models import Apuesta
 from gambler.forms import ApuestaForm
 from django.conf.urls import patterns, url
 from gambler.views import *
-from gambler.views import ApuestaCreate, PartidoDetail, PartidoList, EquipoList, ApuestaList, ResultadoList
+from gambler.views import ApuestaCreate, PartidoDetail, ApuestaDetail, PartidoList, EquipoList, ApuestaList, ResultadoList
 
 urlpatterns = patterns('',
     url(r'^$', TemplateView.as_view(template_name='base.html'), name='base'),
@@ -52,6 +52,16 @@ urlpatterns = patterns('',
     url(r'^partido/(?P<pk>\d+)\.(?P<extension>(json|xml))$',
         PartidoDetail.as_view(),
         name='partido_detail_conneg'),
+
+    # Apuesta details, ex.: /gambler/partido/1/
+    url(r'^apuesta/(?P<pk>\d+)/$',
+        ApuestaDetail.as_view(),
+        name='apuesta_detail'),
+
+    # Apuesta details, ex.: /gambler/apuesta/1.json
+    url(r'^apuesta/(?P<pk>\d+)\.(?P<extension>(json|xml))$',
+        ApuestaDetail.as_view(),
+        name='apuesta_detail_conneg'),
 
     # Create a partido apuesta, ex: /gambler/partido/1/apuesta/create/
     url(r'^partido/(?P<pk>\d+)/apuesta/create/$',

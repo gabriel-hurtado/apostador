@@ -1,15 +1,8 @@
 {% extends "gambler/base.html" %}
 
-{% block title %}Gambler - {{ partido.name }}{% endblock %}
+{% block title %}Gambler {% endblock %}
 
 {% block content %}
-
-<h1>
-    {% if user == partido.user %}
-        (<a href="{% url 'gambler:partido_edit' partido.id %}">edit</a>)
-    {% endif %}
-</h1>
-
 
 <h2>
     Apuestas
@@ -19,7 +12,7 @@
 </h2>
 <ul>
     {% for apuesta in partido.apuestas.all %}
-        <li>{{ apuesta.partido.equipoLocal.nombreEquipo }} {{ apuesta.resultado.golLocal }} - {{ apuesta.partido.equipoVisitante.nombreEquipo }} {{ apuesta.resultado.golVisitante }} Apuesta :  {{ apuesta.apuesta }} € </li>
+        <li>{{ apuesta.partido.equipoLocal.nombreEquipo }} {{ apuesta.resultado.golLocal }} - {{ apuesta.partido.equipoVisitante.nombreEquipo }} {{ apuesta.resultado.golVisitante }} ( Apuesta :  {{ apuesta.apuesta }} € ) </li>
     {% empty %}
         <li>Sorry, no apuestas for this partido yet.</li>
     {% endfor %}
