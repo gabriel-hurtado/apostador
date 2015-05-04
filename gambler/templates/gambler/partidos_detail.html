@@ -20,8 +20,10 @@
     {% endif %}
 </h2>
 <ul>
-    {% for apuesta in partido.apuestas.all %}
+    {% for apuesta in latest_apuesta_list %}
+        {% if partido == apuesta.partido %}
         <li><a href="{% url 'gambler:apuesta_detail' partido.id apuesta.id %}">{{ apuesta.name }}</a></li>
+        {% endif %}
     {% empty %}
         <li>Sorry, no apuestas for this partido yet.</li>
     {% endfor %}

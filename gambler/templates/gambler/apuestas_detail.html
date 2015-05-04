@@ -1,18 +1,22 @@
 {% extends "gambler/base.html" %}
 
+
+ user = models.ForeignKey(User)
+    partido = models.ForeignKey(Partido)
+    cuota = models.DecimalField(max_digits=3, decimal_places=2, default=1)
+    apuesta = models.DecimalField(max_digits=11, decimal_places=2)
+    resultado
+
 {% block content %}
 
 <h1>
-    {{ apuesta.name }}
+    {{ apuesta.user }}
     {% if user == apuesta.user %}
         (<a href="{% url 'gambler:apuesta_edit' apuesta.partido.id apuesta.id %}">edit</a>)
     {% endif %}
 </h1>
-<p>{{ apuesta.description }}</p>
-{% if apuesta.image %}
-    <p><img src="{{ apuesta.image.url }}"/></p>
-{% endif %}
-<p>Served by <a href="{% url 'gambler:partido_detail' apuesta.partido.id %}">{{ apuesta.partido.name }}</a></p>
+<p>{{ apuesta.partido.equipoLocal }} {{ apuesta.resultado.goalLocal }}- {{ apuesta.partido.equipoVisitante }} {{ apuesta.resultado.goalVisitante }}</p>
+<p>Cuota {{ apuesta.cuota }}</p>
 
 {% endblock %}
 
