@@ -14,8 +14,9 @@ class Equipo(models.Model):
 class Resultado(models.Model):
     golLocal = models.IntegerField(default=-1)
     golVisitante = models.IntegerField(default=-1)
-    def __unicode__(self):
-        return u"%s" % self.name
+
+    def __str__(self):
+        return u"%s" % str(self.golLocal)+' - '+str(self.golVisitante)
     def get_absolute_url(self):
         return reverse('gambler:resultado_detail', kwargs={'pk': self.pk})
 
