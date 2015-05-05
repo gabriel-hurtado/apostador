@@ -14,7 +14,7 @@
     {% for apuesta in partido.apuestas.all %}
         <li>{{ apuesta.partido.equipoLocal.nombreEquipo }} {{ apuesta.resultado.golLocal }} - {{ apuesta.partido.equipoVisitante.nombreEquipo }} {{ apuesta.resultado.golVisitante }} ( Apuesta :  {{ apuesta.apuesta }} € ) </li>
     {% empty %}
-        <li>Sorry, no apuestas for this partido yet.</li>
+        <li>Disculpa pero por el momento no tenemos registrado ninguas apuestas para este partido.</li>
     {% endfor %}
 </ul>
 

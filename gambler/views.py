@@ -36,6 +36,7 @@ class ConnegResponseMixin(TemplateResponseMixin):
 
 class PartidoList(ListView, ConnegResponseMixin):
     model = Partido
+    queryset = Partido.objects.all()
     context_object_name = 'latest_partido_list'
     template_name = 'gambler/partidos_list.html'
 

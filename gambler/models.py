@@ -34,7 +34,7 @@ class Partido(models.Model):
 
 class Apuesta(models.Model):
     user = models.ForeignKey(User)
-    partido = models.ForeignKey(Partido)
+    partido = models.ForeignKey(Partido, related_name='apuestas')
     apuesta = models.DecimalField(max_digits=11, decimal_places=2)
     resultado = models.ForeignKey(Resultado)
     def __unicode__(self):
