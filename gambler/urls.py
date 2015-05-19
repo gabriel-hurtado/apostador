@@ -24,7 +24,7 @@ urlpatterns = patterns('',
     url(r'^resultados$', ResultadoList.as_view(), name='resultados_list'),
 
     # List partidos: /gambler/partidos.json
-        url(r'^partidos\.(?P<extension>(json|xml))$',
+        url(r'^partidos\.(?P<extension>(json| xml))$',
         PartidoList.as_view(),
         name='partido_list_conneg'),
 
