@@ -6,8 +6,8 @@ from datetime import date
 
 class Equipo(models.Model):
     nombreEquipo = models.TextField()
-    def __unicode__(self):
-        return u"%s" % self.name
+    def __str__(self):
+        return u"%s" % self.nombreEquipo
     def get_absolute_url(self):
         return reverse('gambler:equipo_detail', kwargs={'pk': self.pk})
 
@@ -27,8 +27,8 @@ class Partido(models.Model):
     cuota = models.DecimalField(max_digits=3, decimal_places=2, default=1)
     fecha = models.DateField(default=date.today)
     resultado = models.ForeignKey(Resultado)
-    def __unicode__(self):
-        return u"%s" % self.name
+    def __str__(self):
+        return u"%s" % str(self.jornada)+' / '+str(self.equipoLocal)+' - '+str(self.equipoVisitante)
     def get_absolute_url(self):
         return reverse('gambler:partido_detail', kwargs={'pk': self.pk})
 
@@ -37,7 +37,7 @@ class Apuesta(models.Model):
     partido = models.ForeignKey(Partido, related_name='apuestas')
     apuesta = models.DecimalField(max_digits=11, decimal_places=2)
     resultado = models.ForeignKey(Resultado)
-    def __unicode__(self):
-        return u"%s" % self.name
+    def __str__(self):
+        return u"%s" % str(self.partido.equipoLocal)+'-'+str(self.partido.equipoVisitante)+'/'+str(self.resultado.golLocal)+' - '+str(self.resultado.golVisitante)+' / '+str(self.apuesta)+'$ - '
     def get_absolute_url(self):
         return reverse('gambler:apuesta_detail', kwargs={'pk': self.pk})
