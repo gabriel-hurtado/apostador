@@ -13,7 +13,8 @@
         {% if user.username %}
             <h3>User {{ user.username }} (<a href="/accounts/logout/?next=/gambler/">logout</a>)</h3>
         {% else %}
-            <h3><a href="/accounts/login/?next=/gambler/">Registrame</a></h3>
+            <h3><a href="/accounts/login/?next=/gambler/">Entra</a></h3>
+            <h3><a href="/accounts/register/?next=/gambler/">Registrate</a></h3>
         {% endif %}
     {% endblock %}
 </div>
