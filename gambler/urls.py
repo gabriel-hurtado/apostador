@@ -1,27 +1,56 @@
-from django.conf.urls import patterns, url
-from django.views.generic import DetailView, ListView, UpdateView, TemplateView
+from django.views.generic import TemplateView
+from django.conf.urls import patterns, url, include
+from rest_framework import routers
 
-from gambler.models import Apuesta
-from gambler.forms import ApuestaForm
-from django.conf.urls import patterns, url
 from gambler.views import *
-from gambler.views import ApuestaCreate, PartidoDetail, ApuestaDetail, PartidoList, EquipoList, ApuestaList, ResultadoList
-
-urlpatterns = patterns('',
-    url(r'^$', TemplateView.as_view(template_name='base.html'), name='base'),
+from gambler.views import APIPartidoDetail, APIResultadoDetail
 
 
-    # List latest 5 apuesta: /gambler/apuestas
-    url(r'^apuestas$', ApuestaList.as_view(), name='apuestas_list'),
 
-    # List latest 5 partido: /gambler/partidos
-    url(r'^partidos$', PartidoList.as_view(), name='partidos_list'),
+# RESTful API
+router = routers.DefaultRouter()
+router.register(r'partidos', PartidoList2)
+router.register(r'equipos', EquipoList2)
+router.register(r'apuestas', ApuestaList2)
+router.register(r'resultados', ResultadoList2)
 
-     # List latest 5 equipo: /gambler/equipos
-    url(r'^equipos$', EquipoList.as_view(), name='equipos_list'),
+urlpatterns = patterns('gambler.views',
 
-     # List latest 5 equipo: /gambler/equipos
-    url(r'^resultados$', ResultadoList.as_view(), name='resultados_list'),
+                       url(r'^api/', include(router.urls)),
+                       url(r'^api/partidos/(?P<pk>\d+)/$',
+                           APIPartidoDetail.as_view(),
+                           name='partido-detail'),
+
+                       url(r'^api/resultados/(?P<pk>\d+)/$',
+                           APIResultadoDetail.as_view(),
+                           name='resultado-detail'),
+
+                       # Non RESTful API
+
+                       # Home Page /gambler/
+                       url(r'^$',
+                           TemplateView.as_view(template_name='base.html'),
+                           name='base'),
+
+                       # List latest 5 apuestas: /gambler/apuestas
+                       url(r'^apuestas$',
+                           ApuestaList.as_view(),
+                           name='apuestas_list'),
+
+                       # List latest 5 partidos: /gambler/partidos
+                       url(r'^partidos$',
+                           PartidoList.as_view(),
+                           name='partidos_list'),
+
+                       # List latest 5 equipos: /gambler/equipos
+                       url(r'^equipos$',
+                           EquipoList.as_view(),
+                           name='equipos_list'),
+
+                       # List latest 5 resultados: /gambler/equipos
+                       url(r'^resultados$',
+                           ResultadoList.as_view(),
+                           name='resultados_list'),
 
     # List partidos: /gambler/partidos.json
         url(r'^partidos\.(?P<extension>(json| xml))$',
@@ -63,7 +92,7 @@ urlpatterns = patterns('',
         ApuestaDetail.as_view(),
         name='apuesta_detail_conneg'),
 
-    # Create a partido apuesta, ex: /gambler/partido/1/apuesta/create/
+                       # Create a apuesta, ex: /gambler/partido/1/apuesta/create/
     url(r'^partido/(?P<pk>\d+)/apuesta/create/$',
         ApuestaCreate.as_view(),
         name='apuesta_create'),

@@ -1,12 +1,13 @@
 # Create your views here.
-from django.core import serializers
-from django.core import urlresolvers
-from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import get_object_or_404
+from django.http import HttpResponse
 from django.views.generic import DetailView, ListView
 from django.views.generic.base import TemplateResponseMixin
 from django.views.generic.edit import CreateView
+from rest_framework import generics, permissions
+from rest_framework import viewsets
 
+from gambler import serializers
+from gambler.serializers import *
 from gambler.models import Partido, Apuesta, Equipo, Resultado
 from gambler.forms import ApuestaForm
 
@@ -80,4 +81,63 @@ class ApuestaCreate(CreateView):
         form.instance.user = self.request.user
         form.instance.partido = Partido.objects.get(id=self.kwargs['pk'])
         return super(ApuestaCreate, self).form_valid(form)
+
+
+### RESTful API views ###
+
+class IsOwnerOrReadOnly(permissions.BasePermission):
+    def has_object_permission(self, request, view, obj):
+        # Read permissions are allowed to any request,
+        # so we'll always allow GET, HEAD or OPTIONS requests.
+        if request.method in permissions.SAFE_METHODS:
+            return True
+
+        # Instance must have an attribute named `owner`.
+        return obj.user == request.user
+
+
+class PartidoList2(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Partido.objects.all()
+    serializer_class = PartidoSerializer
+
+
+class EquipoList2(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Equipo.objects.all()
+    serializer_class = EquipoSerializer
+
+
+class ApuestaList2(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Apuesta.objects.all()
+    serializer_class = ApuestaSerializer
+
+
+class ResultadoList2(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Resultado.objects.all()
+    serializer_class = ResultadoSerializer
+
+
+class APIPartidoDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsOwnerOrReadOnly,)
+    model = Partido
+    queryset = Partido.objects.all()
+    serializer_class = PartidoSerializer
+
+
+class APIResultadoDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsOwnerOrReadOnly,)
+    model = Resultado
+    queryset = Resultado.objects.all()
+    serializer_class = ResultadoSerializer
 
