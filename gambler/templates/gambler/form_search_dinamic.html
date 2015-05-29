@@ -1,0 +1,50 @@
+{% extends "gambler/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+	<script>
+        $(function()	{
+            $("#id_pais").autocomplete({
+                source:	function(	request,	response	)	{
+                    $.ajax({
+                        url:	"http://ws.geonames.org/searchJSON",
+                        dataType:	"jsonp",
+                        data:	{
+                            featureClass:	"P",
+                            maxRows:	10,
+                            name_startsWith:	request.term,
+				            username:	"APIgambler"
+                        },
+                        success:	function(	data	)	{
+                            response(	$.map(	data.geonames,	function(	item	)	{
+                                return	{
+                                    label:	item.name	+	(item.adminName1	?	",	"	+
+                                    item.adminName1	:	"")	+	",	"	+	item.countryName,
+                                    value:	item.name,
+                                    stateOrProvince:	item.adminName1,
+                                    countryName:	item.countryName
+                                }
+                            }));
+                        }
+                    });
+                },
+                minLength:	2,
+                select:	function(	event,	ui	)	{
+                    if	(ui.item)	{
+                        $("#id_pais").val(ui.item.countryName);
+                    }
+                }
+            });
+        });
+    </script>
+
+     <form action="/search/" method="get">
+        {% csrf_token %}
+        <table>
+           {{ form.as_table }}
+        </table>
+
+         <input type="submit" value="Search">
+    </form>
+{% endblock %}

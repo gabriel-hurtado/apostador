@@ -6,8 +6,9 @@ from datetime import date
 
 class Equipo(models.Model):
     nombreEquipo = models.TextField()
+    pais = models.TextField(blank=True, null=True)
     def __str__(self):
-        return u"%s" % self.nombreEquipo
+        return u"%s" % str(self.nombreEquipo)+'-'+str(self.pais)
     def get_absolute_url(self):
         return reverse('gambler:equipo_detail', kwargs={'pk': self.pk})
 

@@ -2,6 +2,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link	rel="stylesheet"	href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jqueryui.css"/>
+    <script	src="http://code.jquery.com/jquery-1.9.1.js"></script>
+	<script	src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <link rel="stylesheet" href="{% static "style/base.css" %}" />
     <title>{% block title %}Gambler by Apostador.org{% endblock %}</title>
 </head>
@@ -31,6 +34,8 @@
             <ul>
             <li><a href="/gambler/partidos">Partidos</a></li>
             <li><a href="/gambler/equipos">Equipos</a></li>
+            <li><a href="/gambler/equipos_estatico">Busqueda de Equipos (Estatico)</a></li>
+            <li><a href="/gambler/equipos_dinamico">Busqueda de Equipos (Dinamico)</a></li>
             {% if user.is_authenticated %}
             <li><a href="/gambler/apuestas">Apuestas</a></li>
             {% endif %}

@@ -3,6 +3,8 @@ from django.conf import settings
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
+from gambler import views
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -11,4 +13,5 @@ urlpatterns = patterns('',
     url(r'^accounts/login/$', 'django.contrib.auth.views.login'),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
     url(r'^admin/', include(admin.site.urls)),
+     (r'^search/$', views.search),
 )

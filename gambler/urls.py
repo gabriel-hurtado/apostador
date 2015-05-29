@@ -92,8 +92,17 @@ urlpatterns = patterns('gambler.views',
         ApuestaDetail.as_view(),
         name='apuesta_detail_conneg'),
 
-                       # Create a apuesta, ex: /gambler/partido/1/apuesta/create/
+    # Create a apuesta, ex: /gambler/partido/1/apuesta/create/
     url(r'^partido/(?P<pk>\d+)/apuesta/create/$',
         ApuestaCreate.as_view(),
         name='apuesta_create'),
+
+
+       url(r'^equipos_estatico$',
+           EquipoBusqueda.as_view(),
+           name='equipos_estatico'),
+
+        url(r'^equipos_dinamico$',
+           EquipoBusqueda.as_view(),
+           name='equipos_dinamico'),
 )

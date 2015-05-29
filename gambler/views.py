@@ -1,5 +1,6 @@
 # Create your views here.
 from django.http import HttpResponse
+from django.shortcuts import render
 from django.views.generic import DetailView, ListView
 from django.views.generic.base import TemplateResponseMixin
 from django.views.generic.edit import CreateView
@@ -9,7 +10,7 @@ from rest_framework import viewsets
 from gambler import serializers
 from gambler.serializers import *
 from gambler.models import Partido, Apuesta, Equipo, Resultado
-from gambler.forms import ApuestaForm
+from gambler.forms import ApuestaForm, EquipoForm
 
 
 class ConnegResponseMixin(TemplateResponseMixin):
@@ -34,6 +35,15 @@ class ConnegResponseMixin(TemplateResponseMixin):
                 return self.render_xml_object_response(objects=objects)
         else:
             return super(ConnegResponseMixin, self).render_to_response(context)
+
+def search(request):
+    if 'pais' in request.GET and request.GET['pais']:
+        pais = request.GET['pais']
+        equipos = Equipo.objects.filter(pais__icontains=pais)
+        return render(request, 'search_results.html',
+            {'equipos': equipos, 'query': pais})
+    else:
+        return render(request, 'search_form.html', {'error': True})
 
 class PartidoList(ListView, ConnegResponseMixin):
     model = Partido
@@ -82,6 +92,13 @@ class ApuestaCreate(CreateView):
         form.instance.partido = Partido.objects.get(id=self.kwargs['pk'])
         return super(ApuestaCreate, self).form_valid(form)
 
+class EquipoBusqueda(CreateView):
+    model = Equipo
+    template_name = 'gambler/form_seach.html'
+    form_class = EquipoForm
+
+    def form_valid(self, form):
+        return super(EquipoBusqueda, self).form_valid(form)
 
 ### RESTful API views ###
 
