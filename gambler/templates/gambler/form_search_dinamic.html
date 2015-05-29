@@ -19,10 +19,6 @@
                         success:	function(	data	)	{
                             response(	$.map(	data.geonames,	function(	item	)	{
                                 return	{
-                                    label:	item.name	+	(item.adminName1	?	",	"	+
-                                    item.adminName1	:	"")	+	",	"	+	item.countryName,
-                                    value:	item.name,
-                                    stateOrProvince:	item.adminName1,
                                     countryName:	item.countryName
                                 }
                             }));
@@ -40,7 +36,6 @@
     </script>
 
      <form action="/search/" method="get">
-        {% csrf_token %}
         <table>
            {{ form.as_table }}
         </table>

@@ -7,7 +7,7 @@ from gambler.models import Equipo, Partido, Resultado, Apuesta
 class EquipoSerializer(HyperlinkedModelSerializer):
     class Meta:
         model = Equipo
-        fields = ('nombreEquipo',)
+        fields = ('nombreEquipo', 'pais')
 
 
 class ResultadoSerializer(HyperlinkedModelSerializer):

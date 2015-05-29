@@ -43,7 +43,7 @@ def search(request):
         return render(request, 'search_results.html',
             {'equipos': equipos, 'query': pais})
     else:
-        return render(request, 'search_form.html', {'error': True})
+        return render(request, 'search_results.html', {'error': True})
 
 class PartidoList(ListView, ConnegResponseMixin):
     model = Partido
@@ -94,7 +94,7 @@ class ApuestaCreate(CreateView):
 
 class EquipoBusqueda(CreateView):
     model = Equipo
-    template_name = 'gambler/form_seach.html'
+    template_name = 'gambler/form_search.html'
     form_class = EquipoForm
 
     def form_valid(self, form):

@@ -29,6 +29,7 @@
     text-align: center;
 }
 
+
 h1 {
 	color:rgba(147,91,62,1);;
 	margin-left: 40%;
@@ -46,15 +47,15 @@ h2 {
 
 ul li  a{
 	display:block;
-	padding-top:7px;
-	padding-bottom:7px;
-	color: #ffa500;
-	text-decoration:none;
-	font-size: 18px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    color: #ffa500;
+    text-decoration: none;
+    font-size: 18px;
     font-weight: bold;
 }
 
-a{
+a {
 	padding-top:7px;
 	padding-bottom:7px;
 	color: #ffa500;
