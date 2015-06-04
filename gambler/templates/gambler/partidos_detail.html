@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    <span vocab="http://schema.org/" typeof="SportsEvent">
+    <span vocab="http://schema.org/">
 
 <h2>
 
@@ -17,14 +17,15 @@
 
 </h2>
 
- <span property="description">Partido de Liga </span>
+ 
 <ul>
     {% for apuesta in partido.apuestas.all %}
         <li>
-        ID: <span property="name">{{ apuesta.partido.id }}</span>-
-          <span property="homeTeam"> {{  apuesta.partido.equipoLocal.nombreEquipo }}</span> {{ apuesta.resultado.golLocal }} - <span property="awayTeam"> {{ apuesta.partido.equipoVisitante.nombreEquipo }}</span> {{ apuesta.resultado.golVisitante }} ( Apuesta :  {{ apuesta.apuesta }} € ) </li>
+        ID: <p typeof="SportsEvent"> <span property="name"> {{ apuesta.partido.id }}</span>-
+          <span property="homeTeam" typeof="SportsTeam" > <span property="name"> {{  apuesta.partido.equipoLocal.nombreEquipo }}</span></span> {{ apuesta.resultado.golLocal }} - <span property="awayTeam" typeof="SportsTeam"><span property="name"> {{ apuesta.partido.equipoVisitante.nombreEquipo }}</span></span> {{ apuesta.resultado.golVisitante }} ( Apuesta :  {{ apuesta.apuesta }} € )
              <span property="location">{{ apuesta.partido.equipoLocal.pais }}</span>
-        <span property="startDate">{{ apuesta.partido.fecha }}</span>
+        <span property="startDate">{{ apuesta.partido.fecha }}</span></li>
+        </p>
     {% empty %}
         <li>Disculpa pero por el momento no tenemos registrado ninguas apuestas para este partido.</li>
     {% endfor %}
