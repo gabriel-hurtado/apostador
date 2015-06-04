@@ -4,20 +4,32 @@
 
 {% block content %}
 
+    <span vocab="http://schema.org/" typeof="SportsEvent">
+
 <h2>
+
     Apuestas
+
     {% if user.is_authenticated %}
         (<a href="{% url 'gambler:apuesta_create' partido.id %}">anadir</a>)
     {% endif %}
+
+
 </h2>
+
+ <span property="description">Partido de Liga </span>
 <ul>
     {% for apuesta in partido.apuestas.all %}
-        <li>{{ apuesta.partido.equipoLocal.nombreEquipo }} {{ apuesta.resultado.golLocal }} - {{ apuesta.partido.equipoVisitante.nombreEquipo }} {{ apuesta.resultado.golVisitante }} ( Apuesta :  {{ apuesta.apuesta }} € ) </li>
+        <li>
+        ID: <span property="name">{{ apuesta.partido.id }}</span>-
+          <span property="homeTeam"> {{  apuesta.partido.equipoLocal.nombreEquipo }}</span> {{ apuesta.resultado.golLocal }} - <span property="awayTeam"> {{ apuesta.partido.equipoVisitante.nombreEquipo }}</span> {{ apuesta.resultado.golVisitante }} ( Apuesta :  {{ apuesta.apuesta }} € ) </li>
+             <span property="location">{{ apuesta.partido.equipoLocal.pais }}</span>
+        <span property="startDate">{{ apuesta.partido.fecha }}</span>
     {% empty %}
         <li>Disculpa pero por el momento no tenemos registrado ninguas apuestas para este partido.</li>
     {% endfor %}
 </ul>
-
+</span>
 {% endblock %}
 
 {% block footer %}
