@@ -70,3 +70,7 @@ ul li {
 	text-decoration:none;
 	font-size: 22px;
 }
+
+p {
+    text-indent: 2em
+}
