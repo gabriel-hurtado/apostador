@@ -14,3 +14,4 @@ class EquipoForm(ModelForm):
 class ResultadoForm(ModelForm):
     class Meta:
         model = Resultado
+        exclude = ('',)
