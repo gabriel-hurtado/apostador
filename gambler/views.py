@@ -10,7 +10,7 @@ from rest_framework import viewsets
 from gambler import serializers
 from gambler.serializers import *
 from gambler.models import Partido, Apuesta, Equipo, Resultado
-from gambler.forms import ApuestaForm, EquipoForm
+from gambler.forms import *
 
 
 class ConnegResponseMixin(TemplateResponseMixin):
@@ -91,6 +91,23 @@ class ApuestaCreate(CreateView):
         form.instance.user = self.request.user
         form.instance.partido = Partido.objects.get(id=self.kwargs['pk'])
         return super(ApuestaCreate, self).form_valid(form)
+
+class ResultadoCreate(CreateView):
+    model = Resultado
+    template_name = 'gambler/form.html'
+    form_class = ResultadoForm
+
+    def form_valid(self, form):
+        return super(ResultadoCreate, self).form_valid(form)
+
+class ResultadoDetail(DetailView, ConnegResponseMixin):
+    model = Resultado
+    template_name = 'gambler/resultado_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ResultadoDetail, self).get_context_data(**kwargs)
+        return context
+
 
 class EquipoBusqueda(CreateView):
     model = Equipo

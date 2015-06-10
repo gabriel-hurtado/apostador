@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from gambler.models import Apuesta, Equipo
+from gambler.models import Apuesta, Equipo, Resultado
 
 class ApuestaForm(ModelForm):
     class Meta:
@@ -10,3 +10,7 @@ class EquipoForm(ModelForm):
     class Meta:
         model = Equipo
         exclude = ('nombreEquipo',)
+
+class ResultadoForm(ModelForm):
+    class Meta:
+        model = Resultado

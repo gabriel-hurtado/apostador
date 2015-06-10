@@ -4,7 +4,7 @@ from rest_framework import routers
 
 from gambler.views import *
 from gambler.views import APIPartidoDetail, APIResultadoDetail
-
+from gambler.forms import *
 
 
 # RESTful API
@@ -96,6 +96,16 @@ urlpatterns = patterns('gambler.views',
     url(r'^partido/(?P<pk>\d+)/apuesta/create/$',
         ApuestaCreate.as_view(),
         name='apuesta_create'),
+
+    # Create a resultado, ex: /gambler/resultado/create/
+    url(r'^resultado/create/$',
+        ResultadoCreate.as_view(),
+        name='resultado_create'),
+
+    # Resultado details, ex.: /gambler/resultado/1/
+    url(r'^resultado/(?P<pk>\d+)/$',
+        ResultadoDetail.as_view(),
+        name='resultado_detail'),
 
 
        url(r'^equipos_estatico$',
